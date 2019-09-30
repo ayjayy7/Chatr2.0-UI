@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
-const Welcome = () => {
+const Welcome = ({ user }) => {
+  if (user) return <Redirect to="/private" />;
   return (
     <header className="masthead d-flex">
       <div className="container text-center my-auto z-1">
@@ -18,4 +20,8 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+const mapStateToProps = state => ({
+  user: state.user.user
+});
+
+export default connect(mapStateToProps)(Welcome);

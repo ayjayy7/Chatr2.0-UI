@@ -1,9 +1,10 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-import { SET_CURRENT_USER } from "./actionTypes";
+import { SET_CURRENT_USER, SET_ERRORS } from "./actionTypes";
 
 import { setErrors } from "./errors";
+import { fetchAllChannels } from "./channels";
 
 const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
@@ -25,13 +26,13 @@ export const checkForExpiredToken = () => {
         // Set user
         dispatch(setCurrentUser(token));
       } else {
-        //  dispatch(logout());
+        return logout();
       }
     }
   };
 };
 
-export const login = userData => {
+export const login = (userData, history) => {
   return async dispatch => {
     try {
       const res = await axios.post(
@@ -40,13 +41,22 @@ export const login = userData => {
       );
       const user = res.data;
       dispatch(setCurrentUser(user.token));
+      history.replace("/private");
     } catch (err) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: null
+      });
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
       console.error(err);
     }
   };
 };
 
-export const signup = userData => {
+export const signup = (userData, history) => {
   return async dispatch => {
     try {
       const res = await axios.post(
@@ -55,7 +65,12 @@ export const signup = userData => {
       );
       const user = res.data;
       dispatch(setCurrentUser(user.token));
+      history.replace("/private");
     } catch (err) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
       console.error(err);
       console.error(err.response.data);
     }
@@ -63,20 +78,21 @@ export const signup = userData => {
 };
 
 const setCurrentUser = token => {
-  let user = null;
-  if (token) {
-    localStorage.setItem("token", token);
-    axios.defaults.headers.common.Authorization = `jwt ${token}`;
-    user = jwt_decode(token);
-  } else {
-    localStorage.removeItem("token");
-    delete axios.defaults.headers.common.Authorization;
-    user = null;
-  }
-
-  return {
-    type: SET_CURRENT_USER,
-    payload: user
+  return async dispatch => {
+    let user = null;
+    if (token) {
+      localStorage.setItem("token", token);
+      axios.defaults.headers.common.Authorization = `jwt ${token}`;
+      user = jwt_decode(token);
+      dispatch(fetchAllChannels());
+    } else {
+      localStorage.removeItem("token");
+      delete axios.defaults.headers.common.Authorization;
+    }
+    dispatch({
+      type: SET_CURRENT_USER,
+      payload: user
+    });
   };
 };
 

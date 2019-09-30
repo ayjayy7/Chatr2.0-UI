@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionCreators from "../redux/actions";
 class RegistationForm extends Component {
@@ -18,6 +18,8 @@ class RegistationForm extends Component {
   };
 
   render() {
+    if (this.props.user) return <Redirect to="/private" />;
+    console.log(this.props.errors);
     const type = this.props.match.url.substring(1);
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
@@ -68,6 +70,13 @@ class RegistationForm extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+    errors: state.errors
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     signup: (userData, history) =>
@@ -75,6 +84,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(RegistationForm);

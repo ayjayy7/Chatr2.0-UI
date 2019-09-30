@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionCreators from "../redux/actions";
 
@@ -18,6 +18,8 @@ class Login extends Component {
   };
 
   render() {
+    if (this.props.user) return <Redirect to="/private" />;
+    console.log(this.props.errors);
     const { username, password } = this.state;
 
     return (
@@ -29,7 +31,7 @@ class Login extends Component {
                 <label htmlFor="username">Username</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control is-invalid"
                   id="username"
                   value={username}
                   name="username"
@@ -41,13 +43,18 @@ class Login extends Component {
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
-                  className="form-control"
+                  className="form-control is-invalid"
                   id="password"
                   value={password}
                   name="password"
                   placeholder="Password"
                   onChange={this.handleChange}
                 />
+                <div className="invalid-feedback">
+                  {this.props.errors
+                    ? this.props.errors.non_field_errors
+                    : console.log("no")}
+                </div>
               </div>
 
               <button type="submit" className="btn btn-primary">
@@ -64,6 +71,13 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+    errors: state.errors
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     login: (userData, history) =>
@@ -71,6 +85,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Login);
