@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
+import * as actionCreators from "../redux/actions";
 class RegistationForm extends Component {
   state = {
     username: "",
@@ -13,7 +14,7 @@ class RegistationForm extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    alert("I don't work yet");
+    this.props.signup(this.state, this.props.history);
   };
 
   render() {
@@ -67,4 +68,13 @@ class RegistationForm extends Component {
   }
 }
 
-export default RegistationForm;
+const mapDispatchToProps = dispatch => {
+  return {
+    signup: (userData, history) =>
+      dispatch(actionCreators.signup(userData, history))
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(RegistationForm);
