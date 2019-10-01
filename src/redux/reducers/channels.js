@@ -1,14 +1,22 @@
-import { FETCH_CHANNELS } from "../actions/actionTypes";
+import { FETCH_CHANNELS, FETCH_CHANNEL } from "../actions/actionTypes";
 const initialState = {
-  channels: []
+  channels: [],
+  currentChannel: null
 };
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case FETCH_CHANNELS:
-      const newChannel = payload;
+      const allChannels = payload;
       return {
         ...state,
-        channels: newChannel
+        channels: allChannels
+      };
+    case FETCH_CHANNEL:
+      const newChannel = payload;
+      console.log("PLEASE", newChannel);
+      return {
+        ...state,
+        currentChannel: newChannel
       };
     default:
       return state;
