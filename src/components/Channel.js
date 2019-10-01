@@ -19,6 +19,7 @@ class Channel extends React.Component {
       this.props.user
     );
     let text = document.messageForm.message;
+    console.log("that", text);
     text.value = "";
   };
 
@@ -31,16 +32,15 @@ class Channel extends React.Component {
     if (prevProps.match.params.channelID !== channelID) {
       this.props.fetchChannel(channelID);
 
-    //   if (prevProps.channel !== this.props.channel) {
-    //     const chat = document.getElementById("chat");
-      }
+      //   if (prevProps.channel !== this.props.channel) {
+      //     const chat = document.getElementById("chat");
+      //}
     }
   }
 
   render() {
     const channel = this.props.currentChannel;
     if (!!channel) {
-      console.log("Im a channel", channel);
       let ogChannel = this.props.channels.find(
         channel => channel.id == this.props.match.params.channelID
       );

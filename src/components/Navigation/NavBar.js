@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // Components
 import SideNav from "./SideNav";
 import AuthButton from "./AuthButton";
-
+import MessageBox from "./MessageBox";
 const NavBar = () => {
   return (
     <nav
