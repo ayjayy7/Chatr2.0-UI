@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Messages from "./Messages";
-import { fetchChannel } from "../redux/actions";
+import { fetchChannel, sendMessage } from "../redux/actions";
 import { Redirect } from "react-router-dom";
 class Channel extends React.Component {
   state = {
@@ -19,7 +19,7 @@ class Channel extends React.Component {
       this.props.user
     );
     let text = document.messageForm.message;
-    Text.value = "";
+    text.value = "";
   };
 
   componentDidMount() {
@@ -30,9 +30,10 @@ class Channel extends React.Component {
     const channelID = this.props.match.params.channelID;
     if (prevProps.match.params.channelID !== channelID) {
       this.props.fetchChannel(channelID);
-    }
-    if (prevProps.channel !== this.props.channel) {
-      const chat = document.getElementById("chat");
+
+    //   if (prevProps.channel !== this.props.channel) {
+    //     const chat = document.getElementById("chat");
+      }
     }
   }
 
@@ -44,7 +45,10 @@ class Channel extends React.Component {
         channel => channel.id == this.props.match.params.channelID
       );
       const messages = channel.map(messageObject => (
-        <Messages key={messageObject.id} messageObject={messageObject} />
+        <Messages
+          key={`${messageObject.message} ${messageObject.id} ${messageObject.timestamp}`}
+          messageObject={messageObject}
+        />
       ));
       return (
         <div
@@ -53,11 +57,24 @@ class Channel extends React.Component {
           }}
         >
           {messages}
-          <form name="messageForm" onSubmit={this.submitHandler} />
+          <form name="messageForm" onSubmit={this.submitHandler}>
+            <div className="row" id="scroller">
+              <div className="col-12">
+                <textarea
+                  name="message"
+                  placeholder="Type your message"
+                  onChange={this.changeHandler}
+                ></textarea>
+              </div>
+              <div className="col-2" style={{ padding: 0 }}>
+                <input className="btn btn-warning" type="submit" value="Send" />
+              </div>
+            </div>
+          </form>
         </div>
       );
     } else {
-      return <div> Chat Not Found </div>;
+      return <div> Not Found </div>;
     }
   }
 }
@@ -69,7 +86,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   console.log("Called");
   return {
-    fetchChannel: channelID => dispatch(fetchChannel(channelID))
+    fetchChannel: channelID => dispatch(fetchChannel(channelID)),
+    sendMessage: (channelID, message, user) =>
+      dispatch(sendMessage(channelID, message, user))
   };
 };
 export default connect(

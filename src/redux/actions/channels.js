@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_CHANNELS, FETCH_CHANNEL } from "./actionTypes";
+import { FETCH_CHANNELS, FETCH_CHANNEL, SEND_MESSAGE } from "./actionTypes";
 import { setErrors } from "./errors";
 export const fetchAllChannels = () => {
   return async dispatch => {
@@ -29,6 +29,30 @@ export const fetchChannel = channelID => {
       dispatch({
         type: FETCH_CHANNEL,
         payload: channel
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const sendMessage = (channelID, message, user) => {
+  return async dispatch => {
+    try {
+      const res = await axios.post(
+        `https://api-chatr.herokuapp.com/channels/${channelID}/send/`,
+        message
+      );
+      const messageObject = {
+        id: user.user_id,
+        username: user.username,
+        message: res.data.message,
+        timestamp: new Date(),
+        channel: channelID
+      };
+      dispatch({
+        type: SEND_MESSAGE,
+        payload: messageObject
       });
     } catch (error) {
       console.error(error);

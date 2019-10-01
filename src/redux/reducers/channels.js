@@ -1,4 +1,8 @@
-import { FETCH_CHANNELS, FETCH_CHANNEL } from "../actions/actionTypes";
+import {
+  FETCH_CHANNELS,
+  FETCH_CHANNEL,
+  SEND_MESSAGE
+} from "../actions/actionTypes";
 const initialState = {
   channels: [],
   currentChannel: null
@@ -13,10 +17,14 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     case FETCH_CHANNEL:
       const newChannel = payload;
-      console.log("PLEASE", newChannel);
       return {
         ...state,
         currentChannel: newChannel
+      };
+    case SEND_MESSAGE:
+      return {
+        ...state,
+        currentChannel: state.currentChannel.concat(payload)
       };
     default:
       return state;
