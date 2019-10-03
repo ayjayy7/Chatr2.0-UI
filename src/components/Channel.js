@@ -82,6 +82,7 @@ class Channel extends React.Component {
       return (
         <div
           className="pic"
+          id="besh3"
           style={{
             backgroundImage: `url("${ogChannel.image_url}")`
           }}
@@ -90,7 +91,7 @@ class Channel extends React.Component {
 
           <div className="fixed-bottom">
             <form name="messageForm" onSubmit={this.submitHandler}>
-              <div className=" col-12">
+              <div className=" col-12 ">
                 <div className=" btn float-right pull-right">
                   <img
                     id="ej"

@@ -9,7 +9,7 @@ import AuthButton from "./AuthButton";
 const NavBar = props => {
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top nav-nav"
+      className="navbar navbar-expand-lg navbar-dark bg-danger fixed-top nav-nav"
       id="mainNav"
     >
       <Link className="navbar-brand" to="/welcome">

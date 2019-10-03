@@ -31,7 +31,7 @@ class SideNav extends React.Component {
       <div>
         {this.props.loading ? <Loading /> : ""}
         <ul
-          className="navbar-nav navbar-sidenav overflow-hidden"
+          className="navbar-nav navbar-sidenav bg-danger overflow-hidden"
           id="exampleAccordion"
         >
           <li className="nav-item" data-toggle="tooltip" data-placement="right">
@@ -43,7 +43,7 @@ class SideNav extends React.Component {
           </li>
           {channelLinks}
         </ul>
-        <ul className="navbar-nav sidenav-toggler">
+        <ul className="navbar-nav sidenav-toggler bg-danger">
           <li className="nav-item">
             <span
               className="nav-link text-center"
