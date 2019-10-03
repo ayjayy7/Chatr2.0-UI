@@ -3,7 +3,8 @@ import {
   FETCH_CHANNELS,
   FETCH_CHANNEL,
   SEND_MESSAGE,
-  ADD_CHANNEL
+  ADD_CHANNEL,
+  FILTER_CHANNELS
 } from "./actionTypes";
 import { setErrors } from "./errors";
 export const fetchAllChannels = () => {
@@ -82,5 +83,11 @@ export const addChannel = (name, history) => {
       console.error(error);
       console.error(error.response.data);
     }
+  };
+};
+export const filterChannels = query => {
+  return {
+    type: FILTER_CHANNELS,
+    payload: query
   };
 };

@@ -730,3 +730,6 @@ footer.sticky-footer {
   background-size: cover;
   background-attachment: fixed;
 }
+#ej {
+  width: 40px;
+}

@@ -20,7 +20,7 @@ class SideNav extends React.Component {
   state = { collapsed: false };
 
   render() {
-    const channelLinks = this.props.channels.map(channel => (
+    const channelLinks = this.props.filteredChannels.map(channel => (
       <ChannelNavLink
         key={channel.name}
         channel={channel}
@@ -39,7 +39,7 @@ class SideNav extends React.Component {
               <span className="nav-link-text mr-2">Channels</span>
               <FontAwesomeIcon icon={faPlusCircle} />
             </Link>
-            <SearchBar />
+            <SearchBar onChange={this.filterChannels} />
           </li>
           {channelLinks}
         </ul>
@@ -68,7 +68,7 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     channels: state.channels.channels,
-    loading: state.channels.loading
+    filteredChannels: state.channels.filteredChannels
   };
 };
 const mapDispatchToProps = dispatch => {

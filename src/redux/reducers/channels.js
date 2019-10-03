@@ -2,12 +2,13 @@ import {
   FETCH_CHANNELS,
   FETCH_CHANNEL,
   SEND_MESSAGE,
-  ADD_CHANNEL
+  ADD_CHANNEL,
+  FILTER_CHANNELS
 } from "../actions/actionTypes";
 const initialState = {
   channels: [],
   currentChannel: null,
-  load: true
+  filteredChannels: []
 };
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -16,14 +17,13 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         channels: allChannels,
-        load: false
+        filteredChannels: allChannels
       };
     case FETCH_CHANNEL:
       const newChannel = payload;
       return {
         ...state,
-        currentChannel: newChannel,
-        load: false
+        currentChannel: newChannel
       };
     case SEND_MESSAGE:
       return {
@@ -34,6 +34,15 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         channels: state.channels.concat(payload)
+      };
+    case FILTER_CHANNELS:
+      return {
+        ...state,
+        filteredChannels: state.channels.filter(channel => {
+          return `${channel.name}`
+            .toLowerCase()
+            .includes(payload.toLowerCase());
+        })
       };
     default:
       return state;

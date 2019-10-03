@@ -5,5 +5,6 @@ export {
   fetchAllChannels,
   fetchChannel,
   sendMessage,
-  addChannel
+  addChannel,
+  filterChannels
 } from "./channels";
