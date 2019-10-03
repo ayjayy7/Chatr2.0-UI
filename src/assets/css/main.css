@@ -396,8 +396,8 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   .navbar-sidenav
   > .nav-item
   > .nav-link:hover {
-  border-left: 10px solid #eeeee;
-  color: #adb5bd;
+  border-left: 10px solid #000000;
+  color: black;
 }
 
 #mainNav.navbar-dark
@@ -426,7 +426,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   > .nav-item
   > .nav-link.active {
   border-left: 10px solid #eeeeee;
-  color: #fff;
+  color: white;
 }
 
 #mainNav.navbar-dark
@@ -527,6 +527,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   .navbar-sidenav
   > .nav-item
   > .nav-link:hover {
+  border-left: 10px solid #000000;
   color: rgba(0, 0, 0, 0.7);
 }
 
