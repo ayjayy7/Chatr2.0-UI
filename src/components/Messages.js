@@ -5,16 +5,17 @@ const Messages = props => {
     <li>
       <div className=" ">
         <small className="card-body text-danger">
-          <h5 id="besh2">{props.messageObject.username}</h5>
+          <b>
+            <h5 className="text-white bold" id="besh2">
+              {props.messageObject.username}
+            </h5>
+          </b>
           <span className=" m-5 text-left"></span>
         </small>
         <br />
-        <h4
-          className="speech-bubble text-left card-text text-white d-inline-block  my-2  border-radius: 25px;"
-          id="besh"
-        >
+        <h3 className="speech-bubble bg-danger text-left card-text text-white d-inline-block  my-2  border-radius: 25px;">
           {props.messageObject.message}
-        </h4>
+        </h3>
         <p class="card-text"></p>
       </div>
     </li>

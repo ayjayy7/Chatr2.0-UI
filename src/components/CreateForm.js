@@ -52,7 +52,7 @@ class CreateForm extends React.Component {
                   />
                 </div>
                 <div className="text-center mt-4">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-danger">
                     Create
                   </button>
                 </div>

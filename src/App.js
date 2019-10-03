@@ -13,7 +13,7 @@ import LoginForm from "./components/LoginForm";
 import CreateForm from "./components/CreateForm";
 import SuperSecretPage from "./components/SuperSecretPage";
 import Channel from "./components/Channel";
-
+import { connect } from "react-redux";
 class App extends Component {
   componentDidMount() {
     main();
@@ -21,7 +21,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="content-wrapper">
+      <div className="content-wrapper bg-transparent">
         <NavBar />
         <Switch>
           <Route path="/welcome" component={Welcome} />
@@ -38,4 +38,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user: state.user.user
+  };
+};
+export default connect(mapStateToProps)(App);

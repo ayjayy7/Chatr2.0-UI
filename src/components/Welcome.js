@@ -16,7 +16,7 @@ const Welcome = ({ user }) => {
         <h3 className="mb-5 text-white" style={{ fontFamily: "Acme" }}>
           <em>You're gonna need to login to see the messages</em>
         </h3>
-        <Link to="/login" className="btn btn-outline-primary btn-lg">
+        <Link to="/login" className="btn btn-outline-danger btn-lg">
           Login
         </Link>
       </div>

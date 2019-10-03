@@ -22,7 +22,7 @@ class Login extends Component {
     const { username, password } = this.state;
 
     return (
-      <div className="bg my-6">
+      <div className=" my-6">
         <div className="container-fluid jumbotron bg-transparent my-5 text-center align-ceneter">
           <div className=" col-6 mx-auto my-5">
             <div className="card my-5">
@@ -59,11 +59,14 @@ class Login extends Component {
                     </p>
                   </div>
 
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-danger">
                     Login
                   </button>
                   <br />
-                  <Link to="/signup" className="btn btn-link my-2 my-sm-0">
+                  <Link
+                    to="/signup"
+                    className="btn btn-link text-danger my-2 my-sm-0"
+                  >
                     Signup for an account
                   </Link>
                 </form>
