@@ -22,7 +22,7 @@ class RegistationForm extends Component {
     console.log(this.props.errors);
     const type = this.props.match.url.substring(1);
     return (
-      <div className="bg my-6">
+      <div className="bg my-6" id="beeesh">
         <div className="container-fluid jumbotron bg-transparent my-5 text-center align-ceneter">
           <div className="card col-6 mx-auto p-0 mt-5">
             <div className="card-body">

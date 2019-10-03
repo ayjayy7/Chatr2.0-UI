@@ -717,7 +717,7 @@ footer.sticky-footer {
   width: 100%;
 }
 .pic {
-  min-height: 800px;
+  min-height: 1000px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -743,4 +743,9 @@ footer.sticky-footer {
 
 .input-container button {
   float: right;
+}
+
+#beeesh {
+  position: relative;
+  right: 140px;
 }

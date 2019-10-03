@@ -6,7 +6,7 @@ const Welcome = ({ user }) => {
   if (user) return <Redirect to="/private" />;
   return (
     <header className=" bg masthead d-flex">
-      <div className="container text-center my-auto z-1">
+      <div className="container text-center my-auto z-1" id="beeesh">
         <h1
           className="mb-1 text-white"
           style={{ fontFamily: "Acme", fontSize: 100 }}

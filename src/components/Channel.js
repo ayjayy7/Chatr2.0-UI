@@ -102,7 +102,7 @@ class Channel extends React.Component {
                     {this.state.show ? <Picker onSelect={this.addEmoji} /> : ""}
                   </span>
                   <input
-                    className=" btn btn-warning btn-block "
+                    className=" btn btn-danger btn-block "
                     type="submit"
                     value="Send"
                   />
