@@ -64,18 +64,20 @@ export const sendMessage = (channelID, message, user) => {
     }
   };
 };
-export const addChannel = name => {
+export const addChannel = (name, history) => {
   return async dispatch => {
     try {
       const res = await axios.post(
         "https://api-chatr.herokuapp.com/channels/create/",
         name
       );
-      const newChannel = res.data.name;
+      const newChannel = res.data;
+      console.log("res", res.data);
       dispatch({
         type: ADD_CHANNEL,
         payload: newChannel
       });
+      history.replace(`/channels/${newChannel.id}`);
     } catch (error) {
       console.error(error);
       console.error(error.response.data);

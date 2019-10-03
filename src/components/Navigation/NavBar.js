@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 // Components
 import SideNav from "./SideNav";
 import AuthButton from "./AuthButton";
-import MessageBox from "./MessageBox";
-const NavBar = () => {
+const NavBar = props => {
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+      className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top nav-nav"
       id="mainNav"
     >
       <Link className="navbar-brand" to="/welcome">
@@ -25,12 +25,18 @@ const NavBar = () => {
       >
         <span className="navbar-toggler-icon" />
       </button>
-      <div className="collapse navbar-collapse" id="navbarResponsive">
-        <SideNav />
-        <AuthButton />
-      </div>
+      {!!props.user && (
+        <div className="collapse navbar-collapse" id="navbarResponsive">
+          <SideNav />
+        </div>
+      )}
+      <AuthButton />
     </nav>
   );
 };
 
-export default NavBar;
+const mapStateToProps = state => ({
+  user: state.user.user
+});
+
+export default connect(mapStateToProps)(NavBar);

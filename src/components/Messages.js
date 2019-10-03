@@ -1,4 +1,5 @@
 import React from "react";
+
 const Messages = props => {
   return (
     <div className="card bg-transparent">
@@ -7,7 +8,8 @@ const Messages = props => {
         <span className="text-right"></span>
       </h4>
       <div className="card-body">
-        <p className="card-text">{props.messageObject.message}</p>
+        <h5 className="card-text">{props.messageObject.message}</h5>
+        <p class="card-text"></p>
       </div>
     </div>
   );

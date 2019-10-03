@@ -1,6 +1,4 @@
 import React from "react";
-import Messages from "./Messages";
-import MessageBox from "./Navigation/MessageBox";
 
 const Footer = () => {
   return (

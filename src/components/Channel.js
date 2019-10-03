@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import Messages from "./Messages";
 import { fetchChannel, sendMessage } from "../redux/actions";
-import { Redirect } from "react-router-dom";
 class Channel extends React.Component {
   state = {
     message: ""
@@ -26,16 +25,37 @@ class Channel extends React.Component {
   componentDidMount() {
     const channelID = this.props.match.params.channelID;
     this.props.fetchChannel(channelID);
+    this.interval = setInterval(
+      () => {
+        if (this.props.match.params.channelID !== undefined)
+          this.props.fetchChannel(this.props.match.params.channelID);
+      },
+      1000
+      // timeStamp
+    );
   }
+
   componentDidUpdate(prevProps) {
     const channelID = this.props.match.params.channelID;
     if (prevProps.match.params.channelID !== channelID) {
       this.props.fetchChannel(channelID);
-
-      //   if (prevProps.channel !== this.props.channel) {
-      //     const chat = document.getElementById("chat");
-      //}
     }
+    if (this.props.match.params.channelID !== undefined) {
+      if (
+        this.props.match.params.channelID !== prevProps.match.params.channelID
+      ) {
+        this.props.fetchChannel(this.props.match.params.channelID);
+      } else {
+        clearInterval(this.interval);
+        this.interval = setInterval(() => {
+          this.props.fetchChannel(this.props.match.params.channelID);
+        }, 1000);
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
@@ -53,24 +73,25 @@ class Channel extends React.Component {
       return (
         <div
           style={{
-            backgroundImage: `url("${ogChannel.image_url}")`
+            backgroundImage: `url(${ogChannel.image_url})`
           }}
         >
           {messages}
-          <form name="messageForm" onSubmit={this.submitHandler}>
-            <div className="row" id="scroller">
-              <div className="col-12">
-                <textarea
-                  name="message"
-                  placeholder="Type your message"
-                  onChange={this.changeHandler}
-                ></textarea>
-              </div>
-              <div className="col-2" style={{ padding: 0 }}>
-                <input className="btn btn-warning" type="submit" value="Send" />
-              </div>
-            </div>
-          </form>
+          <div className="col-12">
+            <form name="messageForm" onSubmit={this.submitHandler}>
+              <textarea
+                className=" col-11 rounded-pill shadow"
+                name="message"
+                placeholder="Type your message"
+                onChange={this.changeHandler}
+              ></textarea>
+              <input
+                className="col-1 btn btn-outline-secondary btn-lg float-right"
+                type="submit"
+                value="Send"
+              />
+            </form>
+          </div>
         </div>
       );
     } else {

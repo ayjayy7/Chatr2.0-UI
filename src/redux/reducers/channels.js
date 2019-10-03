@@ -6,7 +6,8 @@ import {
 } from "../actions/actionTypes";
 const initialState = {
   channels: [],
-  currentChannel: null
+  currentChannel: null,
+  load: true
 };
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -14,13 +15,15 @@ const reducer = (state = initialState, { type, payload }) => {
       const allChannels = payload;
       return {
         ...state,
-        channels: allChannels
+        channels: allChannels,
+        load: false
       };
     case FETCH_CHANNEL:
       const newChannel = payload;
       return {
         ...state,
-        currentChannel: newChannel
+        currentChannel: newChannel,
+        load: false
       };
     case SEND_MESSAGE:
       return {

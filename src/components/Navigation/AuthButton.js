@@ -28,7 +28,7 @@ const AuthButton = ({ user, logout }) => {
   if (user) {
     buttons = (
       <>
-        <span className="navbar-text">{user.username}</span>
+        <span className="navbar-text ">{user.username}</span>
         <li className="nav-item">
           <span className="nav-link">
             <FontAwesomeIcon icon={faSignOutAlt} onClick={logout} /> Logout

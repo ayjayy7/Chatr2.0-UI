@@ -13,6 +13,7 @@ import {
 
 // Components
 import ChannelNavLink from "./ChannelNavLink";
+import Loading from "../../Loading";
 
 class SideNav extends React.Component {
   state = { collapsed: false };
@@ -27,7 +28,11 @@ class SideNav extends React.Component {
     ));
     return (
       <div>
-        <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
+        {this.props.loading ? <Loading /> : ""}
+        <ul
+          className="navbar-nav navbar-sidenav overflow-hidden"
+          id="exampleAccordion"
+        >
           <li className="nav-item" data-toggle="tooltip" data-placement="right">
             <Link className="nav-link heading" to="/createChannel">
               <span className="nav-link-text mr-2">Channels</span>
@@ -60,7 +65,8 @@ class SideNav extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    channels: state.channels.channels
+    channels: state.channels.channels,
+    loading: state.channels.loading
   };
 };
 const mapDispatchToProps = dispatch => {
