@@ -695,3 +695,38 @@ footer.sticky-footer {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.speech-bubble {
+  position: relative;
+  background: #868e96;
+  border-radius: 20px;
+  padding: 8px;
+}
+
+.speech-bubble:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 40%;
+  width: 0;
+  height: 0;
+  border: 15px solid transparent;
+  border-top-color: #868e96;
+  border-bottom: 0;
+  border-left: 0;
+  margin-left: -6px;
+  margin-bottom: -12px;
+}
+
+.sticky {
+  position: fixed;
+  height: 100px;
+  bottom: 0;
+  width: 100%;
+}
+.pic {
+  min-height: 800px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}

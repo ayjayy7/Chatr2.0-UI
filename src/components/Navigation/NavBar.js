@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 // Components
 import SideNav from "./SideNav";
 import AuthButton from "./AuthButton";
+
 const NavBar = props => {
   return (
     <nav
